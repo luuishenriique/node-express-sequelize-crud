@@ -136,7 +136,7 @@ exports.findAllFlammables = (req, res) => {
     .catch(err => {
       res.status(500).send({
         message:
-          err.message || "Algum erro ocorreu ao tentar apagar todos os itens."
+          err.message || "Algum erro ocorreu ao tentar pesquisar todos os itens inflamáveis."
       });
     });
 };
