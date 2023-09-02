@@ -5,12 +5,12 @@ module.exports = app => {
   
     router.post("/", items.create);
   
-    router.get("/", "Listando todos os itens");
-  
-    router.get("/flammables", items.findAllFlammables);
+    router.get("/", items.findAll);
   
     router.get("/:id", items.findOne);
-  
+
+    router.get("/flammables", items.findAllFlammables);
+    
     router.put("/:id", items.update);
   
     router.delete("/:id", items.delete);

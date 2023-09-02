@@ -1,11 +1,10 @@
 const express = require("express");
 const cors = require ("cors");
-require("./app/routes/item.routes")(app);
 
 const app = express();
 
 var corsOptions = {
-    origin: "http://localhost:8081"
+  origin: "http://localhost:8081"
 }
 
 app.use(cors(corsOptions));
@@ -16,13 +15,14 @@ app.use(express.urlencoded({extended: true}));
 
 const db = require("./app/models");
 db.sequelize.sync()
-  .then(() => {
-    console.log("Banco sincronizado.");
-  })
-  .catch((err) => {
-    console.log("Falha ao acessar o banco de dados: " + err.message);
-  });
+.then(() => {
+  console.log("Banco sincronizado.");
+})
+.catch((err) => {
+  console.log("Falha ao acessar o banco de dados: " + err.message);
+});
 
+require("./app/routes/items.routes")(app);
 
 app.get("/", (req,res) => {
    res.json({message: 'Hello World!'}) 
