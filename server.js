@@ -1,5 +1,6 @@
 const express = require("express");
 const cors = require ("cors");
+// require("./app/routes/items.routes")(app);
 
 const app = express();
 
@@ -22,7 +23,6 @@ db.sequelize.sync()
   console.log("Falha ao acessar o banco de dados: " + err.message);
 });
 
-require("./app/routes/items.routes")(app);
 
 app.get("/", (req,res) => {
    res.json({message: 'Hello World!'}) 
