@@ -11,9 +11,10 @@ exports.create = (req, res) => {
     }
 
     const item = {
-        title: req.body.title,
+        name: req.body.name,
         description: req.body.description,
-        published: req.body.published ? req.body.published : false
+        quantity: req.body.quantity,
+        isFlammable: req.body.isFlammable ? req.body.isFlammable : false
     };
 
     Item.create(item)
@@ -30,7 +31,7 @@ exports.create = (req, res) => {
 
 exports.findAll = (req, res) => {
     const name = req.query.name;
-    var condition = name ? { name: { [Op.like]: `%${name}%` } } : null;
+    var condition = name ? { name: { [Op.iLike]: `%${name}%` } } : null;
   
     Item.findAll({ where: condition })
       .then(data => {
