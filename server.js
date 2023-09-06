@@ -23,12 +23,14 @@ db.sequelize.sync()
 });
 
 require("./app/routes/items.routes")(app);
+require('./app/routes/auth.routes')(app);
+require('./app/routes/user.routes')(app);
 
 app.get("/", (req,res) => {
    res.json({message: 'Hello World!'}) 
 });
 
-const PORT = process.env.PORT || 8080;
+const PORT = process.env.PORT || 8000;
 app.listen(PORT, () => {
     console.log(`Server funcionando na porta ${PORT}.`);
 });
