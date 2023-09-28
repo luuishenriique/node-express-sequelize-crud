@@ -20,5 +20,6 @@ db.Sequelize = Sequelize;
 db.sequelize = sequelize;
 
 db.items = require("./item.model.js")(sequelize, Sequelize);
+db.owners = require("./onwer.model.js")(sequelize, Sequelize);
 
 module.exports = db;

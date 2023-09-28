@@ -23,6 +23,8 @@ db.sequelize.sync()
 });
 
 require("./app/routes/items.routes")(app);
+require("./app/routes/owners.routes")(app);
+
 
 app.get("/", (req,res) => {
    res.json({message: 'Hello World!'}) 
