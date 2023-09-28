@@ -46,9 +46,7 @@ exports.findAll = (req, res) => {
       });
 };
 
-exports.findAllOwnersAndItems = (req, res) => {
-  const name = req.query.name;
-  var condition = name ? { name: { [Op.iLike]: `%${name}%` } } : null;
+exports.findAllAndItems = (req, res) => {
 
   Owner.findAll({ 
     include: 'items'
@@ -59,7 +57,7 @@ exports.findAllOwnersAndItems = (req, res) => {
     .catch(err => {
       res.status(500).send({
         message:
-          err.message || "Algum erro ocorreu ao tentar pesquisar os proprietários."
+          err.message || "Algum erro ocorreu ao tentar pesquisar os proprietários e seus itens."
       });
     });
 };
@@ -79,9 +77,29 @@ exports.findOne = (req, res) => {
       })
       .catch(err => {
         res.status(500).send({
-          message: "Algum erro ocorreu ao tentar encontrar o proprietário com o id=" + id
+          message: err.message || "Algum erro ocorreu ao tentar encontrar o proprietário com o id=" + id
         });
       });
+};
+
+exports.findOneAndItems = (req, res) => {
+  const id = req.params.id;
+
+  Owner.findByPk(id, {include: 'items'})
+    .then(data => {
+      if (data) {
+        res.send(data);
+      } else {
+        res.status(404).send({
+          message: `Não foi possível encontrar o proprietário com o id=${id}.`
+        });
+      }
+    })
+    .catch(err => {
+      res.status(500).send({
+        message: err.message || "Algum erro ocorreu ao tentar encontrar o proprietário com o id=" + id
+      });
+    });
 };
 
 exports.update = (req, res) => {
@@ -103,7 +121,7 @@ exports.update = (req, res) => {
       })
       .catch(err => {
         res.status(500).send({
-          message: "Algum erro ocorreu ao tentar atualizar o proprietário com o id=" + id
+          message: err.message || "Algum erro ocorreu ao tentar atualizar o proprietário com o id=" + id
         });
       });
 };
@@ -127,7 +145,7 @@ exports.delete = (req, res) => {
       })
       .catch(err => {
         res.status(500).send({
-          message: "Algum erro ocorreu ao tentar apagar o proprietário com o id=" + id
+          message: err.message || "Algum erro ocorreu ao tentar apagar o proprietário com o id=" + id
         });
       });
 };

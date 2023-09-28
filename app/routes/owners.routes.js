@@ -5,12 +5,14 @@ module.exports = app => {
 
   router.post("/", owners.create);
 
-  // router.get("/", owners.findAll);
+  router.get("/", owners.findAll);
+
+  router.get("/items", owners.findAllAndItems);
 
   router.get("/:id", owners.findOne);
 
-  router.get("/", owners.findAllOwnersAndItems);
-  
+  router.get("/:id/items", owners.findOneAndItems);
+
   router.put("/:id", owners.update);
 
   router.delete("/:id", owners.delete);

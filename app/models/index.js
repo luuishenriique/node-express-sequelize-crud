@@ -22,4 +22,11 @@ db.sequelize = sequelize;
 db.items = require("./item.model.js")(sequelize, Sequelize);
 db.owners = require("./onwer.model.js")(sequelize, Sequelize);
 
+db.owners.hasMany(db.items, {as: 'items'})
+
+db.items.belongsTo(db.owners, {
+  foreignKey: 'owner_id',
+  as: 'owners'
+})
+
 module.exports = db;
