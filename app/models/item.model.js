@@ -11,13 +11,6 @@ module.exports = (sequelize, Sequelize) => {
       },
       isFlammable: {
         type: Sequelize.BOOLEAN
-      },
-      id_owner:{
-        type: Sequelize.INTEGER,
-        references: {
-          model: 'owners',
-          key: 'id'
-        }
       }
     });
     

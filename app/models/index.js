@@ -25,7 +25,7 @@ db.owners = require("./onwer.model.js")(sequelize, Sequelize);
 db.owners.hasMany(db.items, {as: 'items'})
 
 db.items.belongsTo(db.owners, {
-  foreignKey: 'owner_id',
+  foreignKey: 'ownerId',
   as: 'owners'
 })
 
